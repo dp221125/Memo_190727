@@ -21,6 +21,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G8H-0g-3qG">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="ipf-Wp-KEi">
+                                    <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="izV-Af-LPw">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
@@ -29,9 +34,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="dfk-Ue-D3I" kind="show" id="kLR-63-TLk"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -48,7 +50,7 @@
                     <navigationItem key="navigationItem" title="Memo List" id="ikc-0m-hF3">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1xB-sP-F7X">
                             <connections>
-                                <segue destination="7Jn-O6-rq4" kind="show" id="tcz-0x-kKw"/>
+                                <segue destination="dfk-Ue-D3I" kind="show" identifier="show" id="8Gp-h0-0QZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -60,50 +62,10 @@
             </objects>
             <point key="canvasLocation" x="958" y="78"/>
         </scene>
-        <!--New Memo-->
-        <scene sceneID="0Zl-ee-QQm">
-            <objects>
-                <viewController id="7Jn-O6-rq4" customClass="MemoCreateViewController" customModule="Memo_190727" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="foU-oj-UDM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="메모를 입력하세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-8m-ohP">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="8f3-8m-ohP" firstAttribute="top" secondItem="YB4-H4-voo" secondAttribute="top" id="4xj-u4-MoN"/>
-                            <constraint firstItem="YB4-H4-voo" firstAttribute="trailing" secondItem="8f3-8m-ohP" secondAttribute="trailing" id="YAX-DC-TSn"/>
-                            <constraint firstItem="8f3-8m-ohP" firstAttribute="leading" secondItem="YB4-H4-voo" secondAttribute="leading" id="ZFq-lz-zrP"/>
-                            <constraint firstItem="YB4-H4-voo" firstAttribute="bottom" secondItem="8f3-8m-ohP" secondAttribute="bottom" id="tZO-nN-UDV"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="YB4-H4-voo"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="New Memo" id="FjH-0C-bPB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="OcT-cH-Pxz">
-                            <connections>
-                                <action selector="memoSave:" destination="7Jn-O6-rq4" id="kee-nl-bHr"/>
-                                <segue destination="vVA-gP-P7r" kind="show" id="BNz-Wi-tOc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="memoTextView" destination="8f3-8m-ohP" id="1Wt-Fw-ue0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aMW-hc-TjC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="958" y="805"/>
-        </scene>
-        <!--Memo Detail View Controller-->
+        <!--Title-->
         <scene sceneID="PfO-Ep-SA5">
             <objects>
-                <viewController id="dfk-Ue-D3I" customClass="MemoDetailViewController" customModule="Memo_190727" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="dfk-Ue-D3I" customClass="MemoDetailViewController" customModule="Memo_190727" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kbs-xr-ekE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,13 +86,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BUR-n6-Ktc"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="tIS-vm-VVv">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="nGo-ov-Rgu">
+                            <connections>
+                                <action selector="memoSave:" destination="dfk-Ue-D3I" id="cZm-NN-1UZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="memoContexts" destination="NEz-Ch-7LR" id="773-oo-uN7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndA-cD-Ypv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2036" y="152"/>
+            <point key="canvasLocation" x="1816" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5jR-d9-APv">

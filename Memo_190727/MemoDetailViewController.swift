@@ -7,30 +7,52 @@
 //
 
 import UIKit
-
+protocol DoneDelegate{
+    func reloadData()
+}
 class MemoDetailViewController: UIViewController {
 
-//    var memo = Model(contents: "")
+    var memo: String?
+    var delegate: DoneDelegate?
+    
     @IBOutlet weak var memoContexts: UITextView!
+    
+    @IBAction func memoSave(_ sender: Any) {
+        print("memo save")
+        //1. 텍스트뷰의 텍스트를 저장할 프로퍼티 생성
+        let memo = memoContexts.text
+        
+        //2. 새로운 메모인스턴스를 생성하고 모델배열에 저장
+        if let newMemo = Model(contents: memo ?? "").contents {
+            Model.contentsArr.append(newMemo)
+            delegate?.reloadData()
+            self.navigationController?.popViewController(animated: true)
+        }
+       
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.memoContexts.text = memo.contents
+        self.memoContexts.text = memo
         
+        if memo != nil {
+            
+            guard let _ = self.navigationController else {
+                print("RUN")
+                return
+            }
+            self.navigationItem.title = "EDIT"
+            self.navigationItem.rightBarButtonItem = nil
+        }else {
         
-        // Do any additional setup after loading the view.
+            self.navigationItem.title = "NEW MEMO"
+        }
+        
+       
     }
     
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -1,8 +1,7 @@
 
 import UIKit
 
-class MemoListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class MemoListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DoneDelegate {
 
     @IBOutlet weak var memoTatable: UITableView!
     
@@ -12,22 +11,18 @@ class MemoListViewController: UIViewController, UITableViewDataSource, UITableVi
         self.memoTatable.delegate = self
         self.memoTatable.dataSource = self
         
-        // Do any additional setup after loading the view.
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show" {
+            if let viewController: MemoDetailViewController = segue.destination as? MemoDetailViewController {
+                 viewController.delegate = self
+            }
+           
+        }
     }
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let cell = sender as? UITableViewCell, let indexPath = memoTatable.indexPath(for: "cell") {
-//            let target = Model.contentsArr[indexPath.row]
-//            
-//            if let detailVC = segue.destination as? MemoDetailViewController {
-//                detailVC.memo = target
-//            }
-//        }
-//    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -38,11 +33,24 @@ class MemoListViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = memoTatable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         let newMemo = Model.contentsArr[indexPath.row]
-        cell.textLabel?.text = newMemo.contents
-        //print(indexPath)
-        //print(indexPath.row)
+        cell.textLabel?.text = newMemo
         return cell
     }
     
   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let target = Model.contentsArr[indexPath.row]
+
+        if let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? MemoDetailViewController {
+
+            detailVC.memo = target
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+
+    }
+    
+    func reloadData() {
+        self.memoTatable.reloadData()
+    }
+    
 }
